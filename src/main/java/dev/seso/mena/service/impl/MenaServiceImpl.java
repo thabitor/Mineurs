@@ -59,4 +59,13 @@ public class MenaServiceImpl implements MenaService {
         return MenaMapper.mapToMenaDto(updatedMenaObj);
     }
 
+    @Override
+    public void deleteMena(Long menaId) {
+        Mena mena = menaRepository.findById(menaId).orElseThrow(
+                () -> new ResourceNotFoundException("Mena record with Id " + menaId + " could not be found")
+        );
+
+        menaRepository.deleteById(menaId);
+    }
+
 }

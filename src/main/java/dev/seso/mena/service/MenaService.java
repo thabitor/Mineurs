@@ -10,5 +10,6 @@ public interface MenaService {
     MenaDto getMenaById(Long menaId);
     List<MenaDto> getAllMena();
     MenaDto updateMena(Long menaId, MenaDto updatedMena);
+   public void deleteMena(Long menaId);
 
 }

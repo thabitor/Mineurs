@@ -43,7 +43,7 @@ public class MenaController {
 
     }
 
-    //Build Update Mena Records API
+    //Build Update Mena Record API
 
     @PutMapping("{id}")
 public ResponseEntity<MenaDto> updateMena(@PathVariable("id") Long menaId, @RequestBody MenaDto updatedMena) {
@@ -51,5 +51,11 @@ public ResponseEntity<MenaDto> updateMena(@PathVariable("id") Long menaId, @Requ
     return ResponseEntity.ok(menaDto);
 }
 
+//Build Delete Mena Record API
+    @DeleteMapping("{id}")
+    public ResponseEntity<String> deleteMena(@PathVariable("id") Long menaId){
+        menaService.deleteMena(menaId);
+        return ResponseEntity.ok("Minor has been deleted successfully!");
+    }
 
 }
