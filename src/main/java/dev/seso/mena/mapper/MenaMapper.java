@@ -13,8 +13,10 @@ public static MenaDto mapToMenaDto (Mena mena) {
             mena.getLastName(),
             mena.getDateOfBirth(),
             mena.getNationality(),
-            mena.getTutor(),
-            mena.getStatus()
+            mena.getGuardian(),
+            mena.getStatus(),
+            mena.getDateGuardianDesignation(),
+            mena.getDateGuardianCessation()
             );
 }
 
@@ -26,8 +28,10 @@ public static Mena mapToMena(MenaDto menaDto) {
             menaDto.getLastName(),
             menaDto.getDateOfBirth(),
             menaDto.getNationality(),
-            menaDto.getTutor(),
+            menaDto.getGuardian(),
+            menaDto.getDateGuardianDesignation(),
+            menaDto.getDateGuardianCessation(),
             menaDto.getStatus()
-    );
+            );
 }
 }

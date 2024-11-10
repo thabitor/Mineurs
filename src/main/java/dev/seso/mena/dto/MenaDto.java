@@ -1,12 +1,9 @@
 package dev.seso.mena.dto;
 
-import dev.seso.mena.entity.Tutor;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import dev.seso.mena.entity.Guardian;
+import lombok.*;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 @Getter
 @Setter
@@ -18,9 +15,38 @@ public class MenaDto {
     private Long stNumber;
     private String firstName;
     private String lastName;
-    private Date dateOfBirth;
+    private LocalDate dateOfBirth;
     private String nationality;
-    private Tutor tutor;
+    private Guardian guardian;
+    @Getter(AccessLevel.NONE)
+    @Setter(AccessLevel.NONE)
     private String status;
+    private LocalDate dateGuardianDesignation;
+    private LocalDate dateGuardianCessation;
 
+
+    public void setStatus() {
+
+        this.status = "Active";
+
+        LocalDate dateCompare = LocalDate.now();
+
+        if (dateCompare.getYear() - this.getDateOfBirth().getYear() > 18) {
+            this.status = "Passive";
+        }
+
+    }
+
+    public String getStatus() {
+
+        this.status = "Active";
+
+        LocalDate dateCompare = LocalDate.now();
+
+        if (dateCompare.getYear() - this.getDateOfBirth().getYear() > 18) {
+            this.status = "Passive";
+        }
+
+        return this.status;
+    }
 }

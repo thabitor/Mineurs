@@ -1,8 +1,5 @@
 package dev.seso.mena.service;
-
 import dev.seso.mena.dto.MenaDto;
-import jakarta.persistence.Id;
-
 import java.util.List;
 
 public interface MenaService {
@@ -10,6 +7,6 @@ public interface MenaService {
     MenaDto getMenaById(Long menaId);
     List<MenaDto> getAllMena();
     MenaDto updateMena(Long menaId, MenaDto updatedMena);
-   public void deleteMena(Long menaId);
+    public void deleteMena(Long menaId);
 
 }

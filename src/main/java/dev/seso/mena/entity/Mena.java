@@ -1,21 +1,20 @@
 package dev.seso.mena.entity;
 
-import java.io.Serializable;
-import java.util.Date;
-
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
+import org.jetbrains.annotations.NotNull;
+import java.io.Serializable;
+import java.time.LocalDate;
 
-@Getter
-@Setter
+
+@ToString
 @NoArgsConstructor
 @AllArgsConstructor
+@Getter
+@Setter
 @Entity
-@Table(name= "mena")
-public class Mena implements Serializable  {
+@Table(name = "mena")
+public class Mena implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,15 +29,51 @@ public class Mena implements Serializable  {
     @Column(name = "last_name")
     private String lastName;
 
+    @NotNull
     @Column(name = "date_of_birth", nullable = false)
-    private Date dateOfBirth;
+    private LocalDate dateOfBirth;
 
     @Column(name = "nationality")
     private String nationality;
 
-    @Column(name = "tutor")
-    private Tutor tutor;
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "guardian_last_name")
+    private Guardian guardian;
 
-    @Column(name = "status")
+    @Column(name = "date_designation_guardian")
+    private LocalDate dateGuardianDesignation;
+
+    @Column(name = "date_cessation_guardian")
+    private LocalDate dateGuardianCessation;
+
+    @Setter(AccessLevel.NONE)
+    @Getter(AccessLevel.NONE)
+    @Column(name = "status", nullable = false)
     private String status;
+
+    public String getStatus() {
+
+        this.status = "Active";
+
+        LocalDate dateCompare = LocalDate.now();
+
+        if (dateCompare.getYear() - this.getDateOfBirth().getYear() > 18) {
+            this.status = "Passive";
+        }
+
+        return this.status;
+    }
+
+    public void setStatus() {
+
+        this.status = "Active";
+
+        LocalDate dateCompare = LocalDate.now();
+
+        if (dateCompare.getYear() - this.getDateOfBirth().getYear() > 18) {
+            this.status = "Passive";
+        }
+
+    }
+
 }

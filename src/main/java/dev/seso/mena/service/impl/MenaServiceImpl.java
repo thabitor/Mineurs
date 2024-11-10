@@ -6,7 +6,6 @@ import dev.seso.mena.exception.ResourceNotFoundException;
 import dev.seso.mena.mapper.MenaMapper;
 import dev.seso.mena.repository.MenaRepository;
 import dev.seso.mena.service.MenaService;
-import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -37,9 +36,10 @@ public class MenaServiceImpl implements MenaService {
     @Override
     public List<MenaDto> getAllMena() {
         List<Mena> allMena = menaRepository.findAll();
-        return allMena.stream().map((mena) -> MenaMapper.mapToMenaDto(mena))
+        return allMena.stream().map(MenaMapper::mapToMenaDto)
                 .collect(Collectors.toList());
     }
+
 
     @Override
     public MenaDto updateMena(Long menaId, MenaDto updatedMena) {
@@ -52,7 +52,10 @@ public class MenaServiceImpl implements MenaService {
         mena.setStNumber(updatedMena.getStNumber());
         mena.setNationality(updatedMena.getNationality());
         mena.setDateOfBirth(updatedMena.getDateOfBirth());
-        mena.setStatus(updatedMena.getStatus());
+        mena.setGuardian(updatedMena.getGuardian());
+        mena.setDateGuardianDesignation(updatedMena.getDateGuardianDesignation());
+        mena.setDateGuardianCessation(updatedMena.getDateGuardianCessation());
+        mena.setStatus();
 
         Mena updatedMenaObj = menaRepository.save(mena);
 
