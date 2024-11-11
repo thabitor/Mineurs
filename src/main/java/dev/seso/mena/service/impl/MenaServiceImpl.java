@@ -1,14 +1,13 @@
 package dev.seso.mena.service.impl;
-
 import dev.seso.mena.dto.MenaDto;
 import dev.seso.mena.entity.Mena;
 import dev.seso.mena.exception.ResourceNotFoundException;
 import dev.seso.mena.mapper.MenaMapper;
+import dev.seso.mena.repository.GuardianRepository;
 import dev.seso.mena.repository.MenaRepository;
 import dev.seso.mena.service.MenaService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -17,6 +16,7 @@ import java.util.stream.Collectors;
 public class MenaServiceImpl implements MenaService {
 
     private MenaRepository menaRepository;
+    private GuardianRepository guardianRepository;
 
     @Override
     public MenaDto createMena(MenaDto menaDto) {
@@ -24,6 +24,7 @@ public class MenaServiceImpl implements MenaService {
         Mena savedMena = menaRepository.save(mena);
         return MenaMapper.mapToMenaDto(savedMena);
     }
+
 
     @Override
     public MenaDto getMenaById(Long menaId) {
@@ -70,5 +71,6 @@ public class MenaServiceImpl implements MenaService {
 
         menaRepository.deleteById(menaId);
     }
+
 
 }
