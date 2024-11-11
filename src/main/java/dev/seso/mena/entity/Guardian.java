@@ -1,5 +1,6 @@
 package dev.seso.mena.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -19,7 +20,7 @@ public class Guardian implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "guardian_id")
+    @Column(name = "id")
     private Long id;
 
     @Column(name = "first_name")
@@ -28,7 +29,7 @@ public class Guardian implements Serializable {
     @Column(name = "last_name")
     private String lastName;
 
+    @JsonIgnore
    @OneToMany(mappedBy = "guardian")
-//    @JoinColumn(name = "fk_guardian", referencedColumnName = "last_name")
-    private List<Mena> minors;
+   private List<Mena> minors;
 }

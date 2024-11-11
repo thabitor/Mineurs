@@ -1,8 +1,6 @@
 package dev.seso.mena.dto;
-
 import dev.seso.mena.entity.Guardian;
 import lombok.*;
-
 import java.time.LocalDate;
 
 @Getter
@@ -48,5 +46,9 @@ public class MenaDto {
         }
 
         return this.status;
+    }
+
+    public void assignGuardian(Guardian guardian) {
+        setGuardian(guardian);
     }
 }

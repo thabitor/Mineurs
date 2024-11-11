@@ -37,7 +37,7 @@ public class Mena implements Serializable {
     private String nationality;
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "guardian_last_name")
+    @JoinColumn(name = "guardian", referencedColumnName = "id")
     private Guardian guardian;
 
     @Column(name = "date_designation_guardian")

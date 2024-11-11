@@ -5,11 +5,15 @@ import dev.seso.mena.exception.ResourceNotFoundException;
 import dev.seso.mena.mapper.GuardianMapper;
 import dev.seso.mena.repository.GuardianRepository;
 import dev.seso.mena.service.GuardianService;
-
+import lombok.AllArgsConstructor;
+import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Service
+@AllArgsConstructor
 public class GuardianServiceImpl implements GuardianService {
+
     private GuardianRepository guardianRepository;
 
     @Override
@@ -18,6 +22,8 @@ public class GuardianServiceImpl implements GuardianService {
         Guardian savedGuardian = guardianRepository.save(guardian);
         return GuardianMapper.mapToGuardianDto(savedGuardian);
     }
+
+
 
     @Override
     public GuardianDto getGuardianById(Long guardianId) {
