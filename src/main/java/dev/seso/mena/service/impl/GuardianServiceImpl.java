@@ -47,9 +47,12 @@ public class GuardianServiceImpl implements GuardianService {
                 () -> new ResourceNotFoundException("Guardian record with Id " + guardianId + " could not be found")
         );
 
-        guardian.setFirstName(updatedGuardian.getFirstName());
-        guardian.setLastName(updatedGuardian.getLastName());
-        guardian.setMinors(updatedGuardian.getMinors());
+        if(updatedGuardian.getFirstName() != null)
+            guardian.setFirstName(updatedGuardian.getFirstName());
+        if(updatedGuardian.getLastName() != null)
+            guardian.setLastName(updatedGuardian.getLastName());
+        if(updatedGuardian.getMinors() != null)
+            guardian.setMinors(updatedGuardian.getMinors());
 
         Guardian updatedGuardianObj = guardianRepository.save(guardian);
 

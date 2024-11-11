@@ -1,7 +1,9 @@
 package dev.seso.mena.controller;
 import dev.seso.mena.dto.GuardianDto;
 import dev.seso.mena.dto.MenaDto;
+import dev.seso.mena.entity.Guardian;
 import dev.seso.mena.entity.Mena;
+import dev.seso.mena.mapper.GuardianMapper;
 import dev.seso.mena.service.GuardianService;
 import dev.seso.mena.service.MenaService;
 import lombok.AllArgsConstructor;
@@ -24,17 +26,13 @@ public class MenaController {
     @PostMapping
     public ResponseEntity<MenaDto> createMena(@RequestBody MenaDto menaDto) {
         MenaDto savedMena = menaService.createMena(menaDto);
+            GuardianDto guardianDto = guardianService.getGuardianById(menaDto.getGuardian().getId());
+            if (guardianDto != null) {
+               Guardian existingGuardian = GuardianMapper.mapToGuardian(guardianDto);
+                savedMena.setGuardian(existingGuardian);
+            }
         return new ResponseEntity<>(savedMena, HttpStatus.CREATED);
     }
-
-//    @PutMapping("{menaId}/guardian/{guardianId}")
-//    public ResponseEntity<MenaDto> assignGuardianToMena (@PathVariable Long menaId, @PathVariable Long guardianId) {
-//MenaDto savedMena = menaService.getMenaById(menaId);
-//        GuardianDto guardianDto = guardianService.getGuardianById(guardianId);
-//savedMena.assignGuardian(guardianDto);
-//
-//return ResponseEntity.ok("Guardian has been assigned successfully!");
-//    }
 
     //Build Get Mena Record API
 
